@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Game lineup</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" media="screen">
+  </head>
+  <body>
+    <div class="container">
+      <h1> {{ game.home.team }} ({{ game.home.division }}) - {{ game.guests.team }} ({{ game.guests.division }}) lineup </h1>
+      <h2> {{ game.place }} - {{ game.date }} </h2>
+      {% if game.home.lineup | length > 0 %}
+        <div class="row">
+          <h3>Home</h3>
+          <table class="table table-striped">
+            <tr>
+              <th>Player</th>
+              <th>Number</th>
+              <th>Role</th>
+            </tr>
+            {% for p in game.home.lineup %}
+            <tr>
+              <td>{{ p.name  }} ({{ p.alias }})</td>
+              <td>{{ p.number }} {{ "(" + p.duty + ")" if p.duty != 'd' }}</td>
+              <td>{{ p.role }}</td>
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+      {% endif %}
+
+      {% if game.guests.lineup | length > 0 %}
+        <div class="row">
+          <h3>Guests</h3>
+          <table class="table table-striped">
+            <tr>
+              <th>Player</th>
+              <th>Number</th>
+              <th>Role</th>
+            </tr>
+            {% for p in game.guests.lineup %}
+            <tr>
+              <td>{{ p.name  }} ({{ p.alias }})</td>
+              <td>{{ p.number }} {{ "(" + p.duty + ")" if p.duty != 'd' }}</td>
+              <td>{{ p.role }}</td>
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+      {% endif %}
+    </div>
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  </body>
+</html>
